@@ -6,13 +6,14 @@ const App = () => {
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        fetch('https://dev.to/api/articles?username=muqsitadam')
+        fetch('https://dev.to/api/articles?username=notharshhaa')
         .then(res => res.json())
         .then(posts => {
             setPosts(posts)
             setLoading(false)
         })
     },[])
+
     console.log("Posts state", posts)
     return(
     <div className="App bg-slate-200 h-screen">
@@ -28,15 +29,19 @@ const App = () => {
                     {!loading &&
                     posts.map((post,id) => {
                         return (
-                            <div className="flex flex-col lg:h-48 xl:h-60 2xl:h-48 lg:flex-row my-5 justify-center border border-slate-800 rounded-lg" key={id}>
-                                <img className="w-full lg:w-1/3 object-fill rounded-l-lg" src={post.cover_image} alt="Cover image of article"/>
-                                <div className="w-full lg:w-2/3 h-70 lg:h-60 px-4 pt-2 pb-5 lg:pb-10">                                
-                                    <div className="text-black font-bold text-2xl md:text-3xl mb-1">{post.title}</div>
+                            <div className="flex flex-col lg:flex-row my-7 justify-center border border-slate-800 rounded-lg overflow-hidden" key={id}>
+                                <img className="w-full lg:w-1/3 object-cover rounded-l-lg" src={post.cover_image} alt="Cover image of article"/>
+                                <div className="flex flex-col justify-between w-full lg:w-2/3 px-4 pt-2 pb-5 lg:pb-10">                                
+                                    <div>
+                                    <div className="text-black font-bold text-1xl md:text-2xl mb-1">{post.title}</div>
                                     <p className="text-sm text-grey-dark flex items-center font-semibold">
-                                    {post.published_at.slice(0, 10)}
+                                        {post.published_at.slice(0, 10)}
                                     </p>
-                                    <p className="text-grey-darker text-lg mt-2 mb-5">{post.description}</p>
-                                    <a className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" target="blank" href={post.canonical_url}>Read More</a>
+                                    <p className="text-grey-darker text-lg mt-2 mb-3">{post.description}</p>
+                                    </div>
+                                    <div className="mt-auto">
+                                    <a className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded-full inline-block mt-4 shadow-md" target="_blank" href={post.canonical_url}>Read More</a>
+                                    </div>
                                 </div>
                             </div>
                         )
